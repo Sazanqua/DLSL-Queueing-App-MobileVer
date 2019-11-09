@@ -13,7 +13,7 @@
         android:id="@+id/capilla_home"
         android:transitionName="capilla_transition"
         android:layout_width="match_parent"
-        android:layout_height="469dp"
+        android:layout_height="600dp"
         android:scaleType="centerCrop"
         android:src="@drawable/capilla"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,7 +81,7 @@
 
     <ImageView
         android:id="@+id/bulk_1_home"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="226dp"
         android:scaleType="fitXY"
         android:src="@drawable/bulk1"
@@ -96,7 +96,7 @@
 
     <ImageView
         android:id="@+id/bulk_2_home"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="226dp"
         android:scaleType="fitXY"
         android:src="@drawable/bulk2"

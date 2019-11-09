@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/capilla"
         android:layout_width="match_parent"
-        android:layout_height="335dp"
+        android:layout_height="405dp"
         android:scaleType="centerCrop"
         android:src="@drawable/capilla"
         android:transitionName="capilla_transition"
@@ -28,7 +28,7 @@
     <ImageView
         android:id="@+id/bulk_1"
         android:layout_width="wrap_content"
-        android:layout_height="380dp"
+        android:layout_height="450dp"
         android:scaleType="centerCrop"
         android:src="@drawable/bulk1"
         android:transitionName="bulk1_transition"
@@ -43,7 +43,7 @@
     <ImageView
         android:id="@+id/bulk_2"
         android:layout_width="match_parent"
-        android:layout_height="370dp"
+        android:layout_height="430dp"
         android:scaleType="centerCrop"
         android:src="@drawable/bulk2"
         android:transitionName="bulk2_transition"
@@ -55,15 +55,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/loginButton"
@@ -79,7 +70,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.911" />
 
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
+        android:id="@+id/studNumET"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/studentnumber_bg"
@@ -94,7 +86,8 @@
         app:layout_constraintVertical_bias="0.70" />
 
 
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
+        android:id="@+id/passwordET"
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/studentnumber_bg"
@@ -133,8 +126,8 @@
 
     <ImageView
         android:id="@+id/dlsllogo"
-        android:layout_width="130dp"
-        android:layout_height="200dp"
+        android:layout_width="140dp"
+        android:layout_height="210dp"
         android:scaleType="centerCrop"
         android:src="@drawable/delasallelipaa"
         android:transitionName="example_transition"
