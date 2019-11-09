@@ -47,7 +47,7 @@ public class QueueingNumber extends AppCompatActivity {
         timeTxtVw = findViewById(R.id.timeTxtVw);
 
         queueNumberTxtVw.setText(qn);
-        cashierNumberTxtVw.setText(cn);
+        cashierNumberTxtVw.setText("Cashier "+cn);
         studentNumberTxtVw.setText(sn);
         serviceTypeTxtVw.setText(st);
         serviceLaneTxtVw.setText(sl);
