@@ -28,10 +28,9 @@ public class SharedPrefManager {
         return mInstance;
     }
 
-    public boolean userLogin(String studentNumber, String pass){
+    public boolean userLogin(String pass){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_STUDENTNUMBER, studentNumber);
         editor.putString(KEY_PASS, pass);
         editor.apply();
         return true;
@@ -61,7 +60,7 @@ public class SharedPrefManager {
 
     public boolean isLoggedIn(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        if(sharedPreferences.getString(KEY_STUDENTNUMBER, null) != null){
+        if(sharedPreferences.getString(KEY_PASS, null) != null){
             return true;
         }
         return false;

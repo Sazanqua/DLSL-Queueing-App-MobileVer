@@ -2,6 +2,7 @@ package com.example.dlslqueueingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,18 +21,38 @@ import java.util.Map;
 
 public class QueueingNumber extends AppCompatActivity {
 
-    private TextView queueNumberTxtVw, cashierNumberTxtVw;
+    private TextView queueNumberTxtVw, cashierNumberTxtVw, studentNumberTxtVw, serviceTypeTxtVw, serviceLaneTxtVw, dateTxtVw, timeTxtVw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queueing_number);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
+        String qn = sharedPreferences.getString("qn", "");
+        String cn = sharedPreferences.getString("cn", "");
+        String sn = sharedPreferences.getString("sn", "");
+        String st = sharedPreferences.getString("st", "");
+        String sl = sharedPreferences.getString("sl", "");
+        String d = sharedPreferences.getString("d", "");
+        String t = sharedPreferences.getString("t", "");
+
         queueNumberTxtVw = findViewById(R.id.queueNumberTxtVw);
         cashierNumberTxtVw = findViewById(R.id.cashierNumberTxtVw);
+        studentNumberTxtVw = findViewById(R.id.studentNumberTxtVw);
+        serviceTypeTxtVw = findViewById(R.id.serviceTypeTxtVw);
+        serviceLaneTxtVw = findViewById(R.id.serviceLaneTxtVw);
+        serviceLaneTxtVw = findViewById(R.id.serviceLaneTxtVw);
+        dateTxtVw = findViewById(R.id.dateTxtVw);
+        timeTxtVw = findViewById(R.id.timeTxtVw);
 
-        queueNumberTxtVw.setText(SharedPrefManager.getInstance(this).getQueueNumber());
-        cashierNumberTxtVw.setText(SharedPrefManager.getInstance(this).getCashierNumber());
+        queueNumberTxtVw.setText(qn);
+        cashierNumberTxtVw.setText(cn);
+        studentNumberTxtVw.setText(sn);
+        serviceTypeTxtVw.setText(st);
+        serviceLaneTxtVw.setText(sl);
+        dateTxtVw.setText(d);
+        timeTxtVw.setText(t);
     }
 
 }

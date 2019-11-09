@@ -89,14 +89,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 progressDialog.dismiss();
                                 SharedPrefManager.getInstance(getApplicationContext())
                                         .userLogin(
-                                                obj.getString("studentNumber"),
                                                 obj.getString("pass")
                                         );
-                                SharedPrefManager.getInstance(getApplicationContext())
-                                        .userLogin2(
-                                                obj.getString("queueNumber"),
-                                                obj.getString("cashierNumber")
-                                        );
+                                SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
+                                SharedPreferences.Editor editor=sharedPreferences.edit();
+                                editor.putString("qn", obj.getString("queueNumber"));
+                                editor.putString("cn", obj.getString("cashierNumber"));
+                                editor.putString("sn", obj.getString("studentNumber"));
+                                editor.putString("st", obj.getString("serviceType"));
+                                editor.putString("sl", obj.getString("serviceLane"));
+                                editor.putString("d", obj.getString("date"));
+                                editor.putString("t", obj.getString("time"));
+                                editor.commit();
+
                                 Pair[] pairs = new Pair[4];
                                 pairs[0] = new Pair<View, String>(image1, "example_transition");
                                 pairs[1] = new Pair<View, String>(image2, "capilla_transition");
