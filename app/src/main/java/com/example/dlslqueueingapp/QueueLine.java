@@ -42,7 +42,6 @@ public class QueueLine extends AppCompatActivity {
         cashier1TxtVw4 = findViewById(R.id.cashier1TxtVw4);
 
         viewCashier4();
-
         //cashier1TxtVw1.setText(SharedPrefManager.getInstance(this).getCashier4Num());
         //cashier1TxtVw2.setText("heee");
 

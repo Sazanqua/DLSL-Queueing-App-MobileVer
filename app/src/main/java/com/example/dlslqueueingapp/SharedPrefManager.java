@@ -10,6 +10,8 @@ public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "?";
     private static final String KEY_STUDENTNUMBER = "?";
     private static final String KEY_PASS = "?";
+    private static final String KEY_QUEUENUMBER = "?";
+    private static final String KEY_CASHIERNUMBER = "?";
 
     private static final String CASHIER4_NUM = "?";
     private static final String CASHIER4_TYPE = "?";
@@ -31,6 +33,14 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_STUDENTNUMBER, studentNumber);
         editor.putString(KEY_PASS, pass);
+        editor.apply();
+        return true;
+    }
+    public boolean userLogin2(String queueNo, String cashierNumber){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_QUEUENUMBER, queueNo);
+        editor.putString(KEY_CASHIERNUMBER, cashierNumber);
         editor.apply();
         return true;
     }
@@ -63,6 +73,15 @@ public class SharedPrefManager {
         editor.clear();
         editor.apply();
         return true;
+    }
+
+    public String getQueueNumber(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_QUEUENUMBER, null);
+    }
+    public String getCashierNumber(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_CASHIERNUMBER, null);
     }
 
     public String getStudentNumber(){

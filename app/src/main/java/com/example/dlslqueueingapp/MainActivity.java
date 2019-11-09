@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final ImageView image4 = findViewById(R.id.bulk_2);
         final String studentNumber = studNumET.getText().toString().trim();
         final String pass = passwordET.getText().toString().trim();
+        final String queueNumber="asd";
+        final String cashierNumber="wew";
 
         final Intent intent = new Intent(MainActivity.this, Home.class);
 
@@ -89,6 +91,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         .userLogin(
                                                 obj.getString("studentNumber"),
                                                 obj.getString("pass")
+                                        );
+                                SharedPrefManager.getInstance(getApplicationContext())
+                                        .userLogin2(
+                                                obj.getString("queueNumber"),
+                                                obj.getString("cashierNumber")
                                         );
                                 Pair[] pairs = new Pair[4];
                                 pairs[0] = new Pair<View, String>(image1, "example_transition");
@@ -118,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         Toast.makeText(
                                 getApplicationContext(),
-                                error.getMessage(),
+                                ("No internet connection."),
                                 Toast.LENGTH_LONG
                         ).show();
                     }
@@ -129,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Map<String, String> params = new HashMap<>();
                 params.put("studentNumber", studentNumber);
                 params.put("pass", pass);
+                params.put("queueNumber", queueNumber);
+                params.put("cashierNumber", cashierNumber);
                 return params;
             }
         };
