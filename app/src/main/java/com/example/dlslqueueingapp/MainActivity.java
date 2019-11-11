@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.app.NotificationCompat;
 
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.transition.Fade;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         studNumET = findViewById(R.id.studNumET);
+        studNumET.setInputType(InputType.TYPE_CLASS_NUMBER);
+        studNumET.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(250) });
         passwordET = findViewById(R.id.passwordET);
         passwordET.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         progressDialog = new ProgressDialog(this);
@@ -115,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     editor.putString("sl", obj.getString("serviceLane"));
                                     editor.putString("d", obj.getString("date"));
                                     editor.putString("t", obj.getString("time"));
+                                    editor.putString("p", obj.getString("pass"));
                                     editor.commit();
 
                                     Pair[] pairs = new Pair[4];
@@ -126,26 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     startActivity(intent, options.toBundle());
                                     finish();
                                 }
-
-                                SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
-                                SharedPreferences.Editor editor=sharedPreferences.edit();
-                                editor.putString("qn", obj.getString("queueNumber"));
-                                editor.putString("cn", obj.getString("cashierNumber"));
-                                editor.putString("sn", obj.getString("studentNumber"));
-                                editor.putString("st", obj.getString("serviceType"));
-                                editor.putString("sl", obj.getString("serviceLane"));
-                                editor.putString("d", obj.getString("date"));
-                                editor.putString("t", obj.getString("time"));
-                                editor.commit();
-
-                                Pair[] pairs = new Pair[4];
-                                pairs[0] = new Pair<View, String>(image1, "example_transition");
-                                pairs[1] = new Pair<View, String>(image2, "capilla_transition");
-                                pairs[2] = new Pair<View, String>(image3, "bulk1_transition");
-                                pairs[3] = new Pair<View, String>(image4, "bulk2_transition");
-                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
-                                startActivity(intent, options.toBundle());
-                                finish();
                             } else {
                                 Toast.makeText(
                                         getApplicationContext(),
@@ -177,8 +161,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Map<String, String> params = new HashMap<>();
                 params.put("studentNumber", studentNumber);
                 params.put("pass", pass);
-                params.put("queueNumber", queueNumber);
-                params.put("cashierNumber", cashierNumber);
                 return params;
             }
         };

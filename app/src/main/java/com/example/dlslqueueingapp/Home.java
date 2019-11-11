@@ -3,6 +3,7 @@ package com.example.dlslqueueingapp;
 import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Pair;
@@ -14,6 +15,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Home extends AppCompatActivity implements View.OnClickListener{
 
@@ -21,6 +34,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     private Button qnButton, qlButton, logoutButton;
     private Handler mhandler = new Handler();
     private NotificationHelper mNotificationHelper;
+    private String queueAlertHolder;
+    private String studNumHolder;
+    private String passHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +44,18 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_home);
         mNotificationHelper = new NotificationHelper(this);
 
-        //callFunc();
-
-
+        SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
+        String studentNumber = sharedPreferences.getString("sn", "");
+        String queueAlert = sharedPreferences.getString("qn", "");
+        String pass = sharedPreferences.getString("p", "");
+        queueAlertHolder = queueAlert;
+        studNumHolder = studentNumber;
+        passHolder = pass;
+        callFunc();
         if(!SharedPrefManager.getInstance(this).isLoggedIn()){
             finish();
             startActivity(new Intent(this, MainActivity.class));
         }
-
         qnButton = findViewById(R.id.qnButton);
         qnButton.setOnClickListener(this);
         qlButton = findViewById(R.id.qlButton);
@@ -50,9 +70,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void callFunc(){
-
-
-
         mhandler.postDelayed(mToastRunnable, 1000);
         mToastRunnable.run();
     }
@@ -62,11 +79,54 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         mNotificationHelper.getManeger().notify(1, nb.build());
     }
 
+    private void alertQueryFunc() {
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                Constants.URL_LOGIN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            editor.putString("queueAlert", obj.getString("number_of_queues_before_you"));
+                            editor.commit();
+                            queueAlertHolder = obj.getString("number_of_queues_before_you");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                ("No internet connection."),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("studentNumber", studNumHolder);
+                params.put("pass", passHolder);
+                return params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+
+
     public Runnable mToastRunnable = new Runnable() {
         @Override
         public void run() {
-            int queuesAway=3;
-            if(queuesAway<=3){
+            alertQueryFunc();
+            if(queueAlertHolder.equals("3")){
                 sendOnNotif("Queue Status", "You are currently 3 queues away from being served.");
             }
             mhandler.postDelayed(this, 1000);
