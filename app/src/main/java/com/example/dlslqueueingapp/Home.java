@@ -4,23 +4,32 @@ import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 
 public class Home extends AppCompatActivity implements View.OnClickListener{
 
     private ProgressDialog progressDialog;
     private Button qnButton, qlButton, logoutButton;
+    private Handler mhandler = new Handler();
+    private NotificationHelper mNotificationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        mNotificationHelper = new NotificationHelper(this);
+
+        //callFunc();
+
 
         if(!SharedPrefManager.getInstance(this).isLoggedIn()){
             finish();
@@ -36,58 +45,33 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
         progressDialog = new ProgressDialog(this);
 
-//        Button button = findViewById(R.id.qnButton);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(Home.this, QueueingNumber.class);
-//
-//                Pair[] pairs = new Pair[4];
-//                pairs[0] = new Pair<View, String>(image1, "example_transition");
-//                pairs[1] = new Pair<View, String>(image2, "capilla_transition");
-//                pairs[2] = new Pair<View, String>(image3, "bulk1_transition");
-//                pairs[3] = new Pair<View, String>(image4, "bulk2_transition");
-//
-//
-//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Home.this, pairs);
-//                startActivity(intent, options.toBundle());
-//            }
-//        });
-//
-//        Button button2 = findViewById(R.id.qlButton);
-//        button2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(Home.this, QueueLine.class);
-//
-//                Pair[] pairs = new Pair[2];
-//                pairs[0] = new Pair<View, String>(image3, "bulk1_transition");
-//                pairs[1] = new Pair<View, String>(image4, "bulk2_transition");
-//
-//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Home.this, pairs);
-//                startActivity(intent, options.toBundle());
-//            }
-//        });
-//
-//        Button button3 = findViewById(R.id.logoutButton);
-//        button2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(Home.this, MainActivity.class);
-//
-//                Pair[] pairs = new Pair[2];
-//                pairs[0] = new Pair<View, String>(image3, "bulk1_transition");
-//                pairs[1] = new Pair<View, String>(image4, "bulk2_transition");
-//
-//                SharedPrefManager.getInstance(getApplication()).logout();
-//                finish();
-//
-//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Home.this, pairs);
-//                startActivity(intent, options.toBundle());
-//            }
-//        });
+
 
     }
+
+    public void callFunc(){
+
+
+
+        mhandler.postDelayed(mToastRunnable, 1000);
+        mToastRunnable.run();
+    }
+
+    public void sendOnNotif(String title, String msg){
+        NotificationCompat.Builder nb = mNotificationHelper.getChannerlNotification(title, msg);
+        mNotificationHelper.getManeger().notify(1, nb.build());
+    }
+
+    public Runnable mToastRunnable = new Runnable() {
+        @Override
+        public void run() {
+            int queuesAway=3;
+            if(queuesAway<=3){
+                sendOnNotif("Queue Status", "You are currently 3 queues away from being served.");
+            }
+            mhandler.postDelayed(this, 1000);
+        }
+    };
 
     private void qnButtonFunc(){
         final ImageView image1 = findViewById(R.id.dlsllogo_home);

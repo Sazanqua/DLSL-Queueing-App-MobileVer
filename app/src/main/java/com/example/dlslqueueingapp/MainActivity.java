@@ -8,7 +8,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.app.NotificationCompat;
 
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.transition.Fade;
 import android.util.Pair;
 import android.view.View;
@@ -47,8 +50,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, Home.class));
             return;
         }
+
         studNumET = findViewById(R.id.studNumET);
         passwordET = findViewById(R.id.passwordET);
+        passwordET.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         loginButton = findViewById(R.id.loginButton);
@@ -85,12 +90,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onResponse(String response) {
                         try {
                             JSONObject obj = new JSONObject(response);
+
                             if (!obj.getBoolean("error")) {
                                 progressDialog.dismiss();
                                 SharedPrefManager.getInstance(getApplicationContext())
                                         .userLogin(
                                                 obj.getString("pass")
                                         );
+<<<<<<< HEAD
+
+                                if(obj.getString("hasQueueingNumber")=="NO"){
+                                    Toast.makeText(
+                                            getApplicationContext(),
+                                            ("User has no Queueing Number. Please queue a ticket first."),
+                                            Toast.LENGTH_LONG
+                                    ).show();
+                                }
+                                else {
+                                    SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                                    editor.putString("qn", obj.getString("queueNumber"));
+                                    editor.putString("cn", obj.getString("cashierNumber"));
+                                    editor.putString("sn", obj.getString("studentNumber"));
+                                    editor.putString("st", obj.getString("serviceType"));
+                                    editor.putString("sl", obj.getString("serviceLane"));
+                                    editor.putString("d", obj.getString("date"));
+                                    editor.putString("t", obj.getString("time"));
+                                    editor.commit();
+
+                                    Pair[] pairs = new Pair[4];
+                                    pairs[0] = new Pair<View, String>(image1, "example_transition");
+                                    pairs[1] = new Pair<View, String>(image2, "capilla_transition");
+                                    pairs[2] = new Pair<View, String>(image3, "bulk1_transition");
+                                    pairs[3] = new Pair<View, String>(image4, "bulk2_transition");
+                                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
+                                    startActivity(intent, options.toBundle());
+                                    finish();
+                                }
+
+
+
+=======
                                 SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
                                 SharedPreferences.Editor editor=sharedPreferences.edit();
                                 editor.putString("qn", obj.getString("queueNumber"));
@@ -110,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
                                 startActivity(intent, options.toBundle());
                                 finish();
+>>>>>>> 1d0caec1191802356a9858e9a5f715f9217a4b60
                             } else {
                                 Toast.makeText(
                                         getApplicationContext(),
