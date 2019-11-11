@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         .userLogin(
                                                 obj.getString("pass")
                                         );
-<<<<<<< HEAD
 
                                 if(obj.getString("hasQueueingNumber")=="NO"){
                                     Toast.makeText(
@@ -128,9 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     finish();
                                 }
 
-
-
-=======
                                 SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
                                 SharedPreferences.Editor editor=sharedPreferences.edit();
                                 editor.putString("qn", obj.getString("queueNumber"));
@@ -150,7 +146,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
                                 startActivity(intent, options.toBundle());
                                 finish();
->>>>>>> 1d0caec1191802356a9858e9a5f715f9217a4b60
                             } else {
                                 Toast.makeText(
                                         getApplicationContext(),
