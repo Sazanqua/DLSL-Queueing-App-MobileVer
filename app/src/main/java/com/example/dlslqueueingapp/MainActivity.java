@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         studNumET = findViewById(R.id.studNumET);
         studNumET.setInputType(InputType.TYPE_CLASS_NUMBER);
-        studNumET.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(250) });
+        studNumET.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(10) });
         passwordET = findViewById(R.id.passwordET);
         passwordET.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         progressDialog = new ProgressDialog(this);

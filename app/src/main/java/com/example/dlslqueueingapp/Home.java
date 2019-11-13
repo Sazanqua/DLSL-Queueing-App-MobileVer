@@ -50,6 +50,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         String pass = sharedPreferences.getString("p", "");
         queueAlertHolder = queueAlert;
         studNumHolder = studentNumber;
+
         passHolder = pass;
         callFunc();
         if(!SharedPrefManager.getInstance(this).isLoggedIn()){
@@ -81,8 +82,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
     private void alertQueryFunc() {
         StringRequest stringRequest = new StringRequest(
-                Request.Method.POST,
-                Constants.URL_LOGIN,
+                Request.Method.GET,
+                Constants.URL_FETCH_IFQUEUEIS3,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -90,9 +91,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                             JSONObject obj = new JSONObject(response);
                             SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
                             SharedPreferences.Editor editor=sharedPreferences.edit();
-                            editor.putString("queueAlert", obj.getString("number_of_queues_before_you"));
+                            editor.putString("thirdStudentNum", obj.getString("student_number"));
                             editor.commit();
-                            queueAlertHolder = obj.getString("number_of_queues_before_you");
+                            queueAlertHolder = obj.getString("student_number");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -126,7 +127,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         @Override
         public void run() {
             alertQueryFunc();
-            if(queueAlertHolder.equals("3")){
+            if(queueAlertHolder.equals(studNumHolder)){
                 sendOnNotif("Queue Status", "You are currently 3 queues away from being served.");
             }
             mhandler.postDelayed(this, 1000);

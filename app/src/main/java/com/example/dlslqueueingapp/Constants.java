@@ -8,5 +8,5 @@ public class Constants {
     public static final String URL_CASHIER2 = ROOT_URL+"viewCashier2.php";
     public static final String URL_CASHIER3 = ROOT_URL+"viewCashier3.php";
     public static final String URL_CASHIER4 = ROOT_URL+"viewCashier4.php";
-    public static final String URL_FETCH_IFQUEUEIS3 = ROOT_URL+"orderByCashier1.php";
+    public static final String URL_FETCH_IFQUEUEIS3 = ROOT_URL+"fetchThirdQueue.php";
 }
