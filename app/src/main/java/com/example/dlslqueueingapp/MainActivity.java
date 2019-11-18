@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final ImageView image4 = findViewById(R.id.bulk_2);
         final String studentNumber = studNumET.getText().toString().trim();
         final String pass = passwordET.getText().toString().trim();
-        final String queueNumber="asd";
-        final String cashierNumber="wew";
+        final String queueNumber="";
+        final String cashierNumber="";
 
         final Intent intent = new Intent(MainActivity.this, Home.class);
 

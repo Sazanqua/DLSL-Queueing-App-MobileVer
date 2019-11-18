@@ -37,6 +37,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     private String queueAlertHolder;
     private String studNumHolder;
     private String passHolder;
+    public boolean stopper=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,11 +127,13 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     public Runnable mToastRunnable = new Runnable() {
         @Override
         public void run() {
-            alertQueryFunc();
-            if(queueAlertHolder.equals(studNumHolder)){
-                sendOnNotif("Queue Status", "You are currently 3 queues away from being served.");
+            if(stopper==true){
+                alertQueryFunc();
+                if(queueAlertHolder.equals(studNumHolder)){
+                    sendOnNotif("Queue Status", "You are currently 3 queues away from being served.");
+                }
+                mhandler.postDelayed(this, 1000);
             }
-            mhandler.postDelayed(this, 1000);
         }
     };
 
@@ -191,6 +194,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             qlButtonFunc();
         }
         if (view == logoutButton) {
+            stopper=false;
             userLogOut();
         }
 

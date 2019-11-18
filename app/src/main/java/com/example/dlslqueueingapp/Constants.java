@@ -9,4 +9,31 @@ public class Constants {
     public static final String URL_CASHIER3 = ROOT_URL+"viewCashier3.php";
     public static final String URL_CASHIER4 = ROOT_URL+"viewCashier4.php";
     public static final String URL_FETCH_IFQUEUEIS3 = ROOT_URL+"fetchThirdQueue.php";
+
+
+
+
+    public static final String CASHIER1_NEXTQUEUE2 = ROOT_URL+"AndroidDisplay/1_Cashier_NextQueue1.php";
+    public static final String CASHIER1_NEXTQUEUE3 = ROOT_URL+"AndroidDisplay/1_Cashier_NextQueue2.php";
+    public static final String CASHIER1_NEXTQUEUE4 = ROOT_URL+"AndroidDisplay/1_Cashier_NextQueue3.php";
+    public static final String CASHIER1_NEXTQUEUE5 = ROOT_URL+"AndroidDisplay/1_Cashier_NextQueue4.php";
+    public static final String CASHIER1_NEXTQUEUE6 = ROOT_URL+"AndroidDisplay/1_Cashier_NextQueue5.php";
+
+    public static final String CASHIER2_NEXTQUEUE2 = ROOT_URL+"AndroidDisplay/2_Cashier_NextQueue1.php";
+    public static final String CASHIER2_NEXTQUEUE3 = ROOT_URL+"AndroidDisplay/2_Cashier_NextQueue2.php";
+    public static final String CASHIER2_NEXTQUEUE4 = ROOT_URL+"AndroidDisplay/2_Cashier_NextQueue3.php";
+    public static final String CASHIER2_NEXTQUEUE5 = ROOT_URL+"AndroidDisplay/2_Cashier_NextQueue4.php";
+    public static final String CASHIER2_NEXTQUEUE6 = ROOT_URL+"AndroidDisplay/2_Cashier_NextQueue5.php";
+
+    public static final String CASHIER3_NEXTQUEUE2 = ROOT_URL+"AndroidDisplay/3_Cashier_NextQueue1.php";
+    public static final String CASHIER3_NEXTQUEUE3 = ROOT_URL+"AndroidDisplay/3_Cashier_NextQueue2.php";
+    public static final String CASHIER3_NEXTQUEUE4 = ROOT_URL+"AndroidDisplay/3_Cashier_NextQueue3.php";
+    public static final String CASHIER3_NEXTQUEUE5 = ROOT_URL+"AndroidDisplay/3_Cashier_NextQueue4.php";
+    public static final String CASHIER3_NEXTQUEUE6 = ROOT_URL+"AndroidDisplay/3_Cashier_NextQueue5.php";
+
+    public static final String CASHIER4_NEXTQUEUE2 = ROOT_URL+"AndroidDisplay/4_Cashier_NextQueue1.php";
+    public static final String CASHIER4_NEXTQUEUE3 = ROOT_URL+"AndroidDisplay/4_Cashier_NextQueue2.php";
+    public static final String CASHIER4_NEXTQUEUE4 = ROOT_URL+"AndroidDisplay/4_Cashier_NextQueue3.php";
+    public static final String CASHIER4_NEXTQUEUE5 = ROOT_URL+"AndroidDisplay/4_Cashier_NextQueue4.php";
+    public static final String CASHIER4_NEXTQUEUE6 = ROOT_URL+"AndroidDisplay/4_Cashier_NextQueue5.php";
 }

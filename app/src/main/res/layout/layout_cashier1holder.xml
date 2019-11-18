@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/cashier1Holder"
+        android:layout_width="300dp"
+        android:layout_height="220dp"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Queue Number"
+                android:textColor="#4a4a4a"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:id="@+id/c1_queue2"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#808080"
+                android:textSize="17sp"></TextView>
+
+            <TextView
+                android:id="@+id/c1_queue3"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#808080"
+                android:textSize="17sp"></TextView>
+
+            <TextView
+                android:id="@+id/c1_queue4"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#808080"
+                android:textSize="17sp"></TextView>
+
+            <TextView
+                android:id="@+id/c1_queue5"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#808080"
+                android:textSize="17sp"></TextView>
+
+            <TextView
+                android:id="@+id/c1_queue6"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#808080"
+                android:textSize="17sp"></TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service Lane"
+                android:textColor="#4a4a4a"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:id="@+id/c1_lane2"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#808080"
+                android:textSize="17sp"></TextView>
+
+            <TextView
+                android:id="@+id/c1_lane3"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#808080"
+                android:textSize="17sp"></TextView>
+
+            <TextView
+                android:id="@+id/c1_lane4"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#808080"
+                android:textSize="17sp"></TextView>
+
+            <TextView
+                android:id="@+id/c1_lane5"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#808080"
+                android:textSize="17sp"></TextView>
+
+            <TextView
+                android:id="@+id/c1_lane6"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading..."
+                android:textColor="#808080"
+                android:textSize="17sp"></TextView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
