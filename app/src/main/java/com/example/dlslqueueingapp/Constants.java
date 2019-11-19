@@ -8,7 +8,10 @@ public class Constants {
     public static final String URL_CASHIER2 = ROOT_URL+"viewCashier2.php";
     public static final String URL_CASHIER3 = ROOT_URL+"viewCashier3.php";
     public static final String URL_CASHIER4 = ROOT_URL+"viewCashier4.php";
-    public static final String URL_FETCH_IFQUEUEIS3 = ROOT_URL+"fetchThirdQueue.php";
+    public static final String URL_FETCH_IFQUEUEIS3_CASHIER1 = ROOT_URL+"fetchThirdQueue_Cashier1.php";
+    public static final String URL_FETCH_IFQUEUEIS3_CASHIER2 = ROOT_URL+"fetchThirdQueue_Cashier2.php";
+    public static final String URL_FETCH_IFQUEUEIS3_CASHIER3 = ROOT_URL+"fetchThirdQueue_Cashier3.php";
+    public static final String URL_FETCH_IFQUEUEIS3_CASHIER4 = ROOT_URL+"fetchThirdQueue_Cashier4.php";
 
 
 

@@ -37,6 +37,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     private String queueAlertHolder;
     private String studNumHolder;
     private String passHolder;
+    private String cashierNumberHolder;
+    private String URL_HOLDER;
     public boolean stopper=true;
 
     @Override
@@ -48,9 +50,11 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
         String studentNumber = sharedPreferences.getString("sn", "");
         String queueAlert = sharedPreferences.getString("qn", "");
+        String cashierNumber = sharedPreferences.getString("cn", "");
         String pass = sharedPreferences.getString("p", "");
         queueAlertHolder = queueAlert;
         studNumHolder = studentNumber;
+        cashierNumberHolder = cashierNumber;
 
         passHolder = pass;
         callFunc();
@@ -75,6 +79,19 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         mhandler.postDelayed(mToastRunnable, 1000);
         mToastRunnable.run();
     }
+    public Runnable mToastRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if(stopper==true){
+                alertQueryFunc();
+
+                if(queueAlertHolder.equals(studNumHolder)){
+                    sendOnNotif("Queue Status", "You are currently 3 queues away from being served.");
+                }
+                mhandler.postDelayed(this, 1000);
+            }
+        }
+    };
 
     public void sendOnNotif(String title, String msg){
         NotificationCompat.Builder nb = mNotificationHelper.getChannerlNotification(title, msg);
@@ -82,9 +99,22 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void alertQueryFunc() {
+        if(cashierNumberHolder.equals("1")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS3_CASHIER1;
+        }
+        if(cashierNumberHolder.equals("2")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS3_CASHIER2;
+        }
+        if(cashierNumberHolder.equals("3")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS3_CASHIER3;
+        }
+        if(cashierNumberHolder.equals("4")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS3_CASHIER4;
+        }
+
         StringRequest stringRequest = new StringRequest(
                 Request.Method.GET,
-                Constants.URL_FETCH_IFQUEUEIS3,
+                URL_HOLDER,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -124,18 +154,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
 
 
-    public Runnable mToastRunnable = new Runnable() {
-        @Override
-        public void run() {
-            if(stopper==true){
-                alertQueryFunc();
-                if(queueAlertHolder.equals(studNumHolder)){
-                    sendOnNotif("Queue Status", "You are currently 3 queues away from being served.");
-                }
-                mhandler.postDelayed(this, 1000);
-            }
-        }
-    };
+
 
     private void qnButtonFunc(){
         final ImageView image1 = findViewById(R.id.dlsllogo_home);
