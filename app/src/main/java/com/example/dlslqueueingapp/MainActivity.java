@@ -93,15 +93,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onResponse(String response) {
                         try {
                             JSONObject obj = new JSONObject(response);
-
                             if (!obj.getBoolean("error")) {
                                 progressDialog.dismiss();
-                                SharedPrefManager.getInstance(getApplicationContext())
-                                        .userLogin(
-                                                obj.getString("pass")
-                                        );
 
-                                if(obj.getString("hasQueueingNumber")=="NO"){
+                                if(obj.getString("hasQueueingNumber").equals("NO")){
                                     Toast.makeText(
                                             getApplicationContext(),
                                             ("User has no Queueing Number. Please queue a ticket first."),
@@ -109,6 +104,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     ).show();
                                 }
                                 else {
+                                    SharedPrefManager.getInstance(getApplicationContext())
+                                            .userLogin(
+                                                    obj.getString("pass")
+                                            );
                                     SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
                                     SharedPreferences.Editor editor=sharedPreferences.edit();
                                     editor.putString("qn", obj.getString("queueNumber"));
