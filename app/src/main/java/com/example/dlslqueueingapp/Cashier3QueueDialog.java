@@ -64,7 +64,7 @@ public class Cashier3QueueDialog extends AppCompatDialogFragment {
     }
 
     public void callFunc(){
-        mhandler.postDelayed(runnableFunc, 1000);
+        mhandler.postDelayed(runnableFunc, 5000);
         runnableFunc.run();
     }
     public Runnable runnableFunc = new Runnable() {
@@ -75,7 +75,7 @@ public class Cashier3QueueDialog extends AppCompatDialogFragment {
             viewCashier1_nextQueue4();
             viewCashier1_nextQueue5();
             viewCashier1_nextQueue6();
-            mhandler.postDelayed(this, 1000);
+            mhandler.postDelayed(this, 5000);
         }
     };
     private void viewCashier1_nextQueue2() {

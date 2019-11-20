@@ -61,9 +61,6 @@ public class QueueLine extends AppCompatActivity implements View.OnClickListener
 
     }
 
-
-
-
     @Override
     public void onClick(View view) {
         if (view == l1) {
@@ -99,7 +96,7 @@ public class QueueLine extends AppCompatActivity implements View.OnClickListener
     }
 
     public void callFunc(){
-        mhandler.postDelayed(runnableFunc, 1000);
+        mhandler.postDelayed(runnableFunc, 5000);
         runnableFunc.run();
     }
 
@@ -110,7 +107,7 @@ public class QueueLine extends AppCompatActivity implements View.OnClickListener
             viewCashier2();
             viewCashier3();
             viewCashier4();
-            mhandler.postDelayed(this, 1000);
+            mhandler.postDelayed(this, 5000);
         }
     };
 
