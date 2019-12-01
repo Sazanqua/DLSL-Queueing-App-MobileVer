@@ -34,12 +34,13 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     private Button qnButton, qlButton, logoutButton;
     private Handler mhandler = new Handler();
     private NotificationHelper mNotificationHelper;
-    private String queueAlertHolder;
-    private String studNumHolder;
+    public static String queueAlertHolder, queueAlertHolder2, queueAlertHolder3;
+    public static String studNumHolder;
     private String passHolder;
     private String cashierNumberHolder;
     private String URL_HOLDER;
     public boolean stopper=true;
+    private int cHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +51,13 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
         String studentNumber = sharedPreferences.getString("sn", "");
         String queueAlert = sharedPreferences.getString("qn", "");
+        String queueAlert2 = sharedPreferences.getString("qn2", "");
+        String queueAlert3 = sharedPreferences.getString("qn3", "");
         String cashierNumber = sharedPreferences.getString("cn", "");
         String pass = sharedPreferences.getString("p", "");
         queueAlertHolder = queueAlert;
+        queueAlertHolder2 = queueAlert2;
+        queueAlertHolder3 = queueAlert3;
         studNumHolder = studentNumber;
         cashierNumberHolder = cashierNumber;
 
@@ -83,13 +88,44 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         @Override
         public void run() {
             if(stopper==true){
-                alertQueryFunc();
-
-                if(queueAlertHolder.equals(studNumHolder)){
-                    sendOnNotif("Queue Status", "You are currently 3 queues away from being served.");
+                if(NotificationBroadcastReceiver.holder==0){
+                    if(queueAlertHolder.equals(studNumHolder)){
+                        sendOnNotif("Queue Status", "You are currently 3 queues away from being served.");
+                        cHolder=1;
+                    }
+                    else if(queueAlertHolder2.equals(studNumHolder)){
+                        sendOnNotif("Queue Status", "You are currently 2 queues away from being served.");
+                        cHolder=2;
+                    }
+                    else if(queueAlertHolder3.equals(studNumHolder)){
+                        sendOnNotif("Queue Status", "You are currently 1 queue away from being served.");
+                        cHolder=3;
+                    }
                 }
-                mhandler.postDelayed(this, 1000);
+                if(cHolder==1){
+                    if(!queueAlertHolder.equals(studNumHolder)){
+                        NotificationBroadcastReceiver.holder = 0;
+                        NotificationBroadcastReceiver.counter = 0;
+                    }
+                }
+                else if(cHolder==2){
+                    if(!queueAlertHolder2.equals(studNumHolder)){
+                        NotificationBroadcastReceiver.holder = 0;
+                        NotificationBroadcastReceiver.counter = 0;
+                    }
+                }
+                else if(cHolder==3){
+                    if(!queueAlertHolder3.equals(studNumHolder)){
+                        NotificationBroadcastReceiver.holder = 0;
+                        NotificationBroadcastReceiver.counter = 0;
+                    }
+                }
+
             }
+            alertQueryFunc();
+            alertQueryFunc2();
+            alertQueryFunc3();
+            mhandler.postDelayed(this, 1000);
         }
     };
 
@@ -111,7 +147,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         if(cashierNumberHolder.equals("4")){
             URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS3_CASHIER4;
         }
-
         StringRequest stringRequest = new StringRequest(
                 Request.Method.GET,
                 URL_HOLDER,
@@ -140,18 +175,99 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                         ).show();
                     }
                 }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("studentNumber", studNumHolder);
-                params.put("pass", passHolder);
-                return params;
-            }
-        };
+        ) ;
         RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
     }
 
+    private void alertQueryFunc2() {
+        if(cashierNumberHolder.equals("1")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS2_CASHIER1;
+        }
+        if(cashierNumberHolder.equals("2")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS2_CASHIER2;
+        }
+        if(cashierNumberHolder.equals("3")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS2_CASHIER3;
+        }
+        if(cashierNumberHolder.equals("4")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS2_CASHIER4;
+        }
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET,
+                URL_HOLDER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            editor.putString("secondStudentNum", obj.getString("student_number"));
+                            editor.commit();
+                            queueAlertHolder2 = obj.getString("student_number");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                ("No internet connection."),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                }
+        ) ;
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    private void alertQueryFunc3() {
+        if(cashierNumberHolder.equals("1")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS1_CASHIER1;
+        }
+        if(cashierNumberHolder.equals("2")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS1_CASHIER2;
+        }
+        if(cashierNumberHolder.equals("3")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS1_CASHIER3;
+        }
+        if(cashierNumberHolder.equals("4")){
+            URL_HOLDER = Constants.URL_FETCH_IFQUEUEIS1_CASHIER4;
+        }
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET,
+                URL_HOLDER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            editor.putString("firstStudentNum", obj.getString("student_number"));
+                            editor.commit();
+                            queueAlertHolder3 = obj.getString("student_number");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                ("No internet connection."),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                }
+        ) ;
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
+    }
 
 
 

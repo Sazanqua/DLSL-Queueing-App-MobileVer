@@ -8,6 +8,17 @@ public class Constants {
     public static final String URL_CASHIER2 = ROOT_URL+"viewCashier2.php";
     public static final String URL_CASHIER3 = ROOT_URL+"viewCashier3.php";
     public static final String URL_CASHIER4 = ROOT_URL+"viewCashier4.php";
+
+    public static final String URL_FETCH_IFQUEUEIS1_CASHIER1 = ROOT_URL+"fetchFirstQueue_Cashier1.php";
+    public static final String URL_FETCH_IFQUEUEIS1_CASHIER2 = ROOT_URL+"fetchFirstQueue_Cashier2.php";
+    public static final String URL_FETCH_IFQUEUEIS1_CASHIER3 = ROOT_URL+"fetchFirstQueue_Cashier3.php";
+    public static final String URL_FETCH_IFQUEUEIS1_CASHIER4 = ROOT_URL+"fetchFirstQueue_Cashier4.php";
+
+    public static final String URL_FETCH_IFQUEUEIS2_CASHIER1 = ROOT_URL+"fetchSecondQueue_Cashier1.php";
+    public static final String URL_FETCH_IFQUEUEIS2_CASHIER2 = ROOT_URL+"fetchSecondQueue_Cashier2.php";
+    public static final String URL_FETCH_IFQUEUEIS2_CASHIER3 = ROOT_URL+"fetchSecondQueue_Cashier3.php";
+    public static final String URL_FETCH_IFQUEUEIS2_CASHIER4 = ROOT_URL+"fetchSecondQueue_Cashier4.php";
+
     public static final String URL_FETCH_IFQUEUEIS3_CASHIER1 = ROOT_URL+"fetchThirdQueue_Cashier1.php";
     public static final String URL_FETCH_IFQUEUEIS3_CASHIER2 = ROOT_URL+"fetchThirdQueue_Cashier2.php";
     public static final String URL_FETCH_IFQUEUEIS3_CASHIER3 = ROOT_URL+"fetchThirdQueue_Cashier3.php";
