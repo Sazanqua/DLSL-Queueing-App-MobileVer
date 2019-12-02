@@ -8,6 +8,8 @@ public class Constants {
     public static final String URL_CASHIER2 = ROOT_URL+"viewCashier2.php";
     public static final String URL_CASHIER3 = ROOT_URL+"viewCashier3.php";
     public static final String URL_CASHIER4 = ROOT_URL+"viewCashier4.php";
+    public static final String URL_AUTOLOGOUT = ROOT_URL+"autoLogoutInAndroid.php";
+
 
     public static final String URL_FETCH_IFQUEUEIS1_CASHIER1 = ROOT_URL+"fetchFirstQueue_Cashier1.php";
     public static final String URL_FETCH_IFQUEUEIS1_CASHIER2 = ROOT_URL+"fetchFirstQueue_Cashier2.php";

@@ -2,6 +2,7 @@ package com.example.dlslqueueingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -53,6 +54,11 @@ public class QueueingNumber extends AppCompatActivity {
         serviceLaneTxtVw.setText(sl);
         dateTxtVw.setText(d);
         timeTxtVw.setText(t);
+
+        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
+        }
     }
 
 }

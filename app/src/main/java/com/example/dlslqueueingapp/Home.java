@@ -39,7 +39,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     private String passHolder;
     private String cashierNumberHolder;
     private String URL_HOLDER;
-    public boolean stopper=true;
+    public boolean stopper=true, autoLogoutStopper=true;
     private int cHolder;
 
     @Override
@@ -88,17 +88,20 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         @Override
         public void run() {
             if(stopper==true){
+//                Toast.makeText(getApplicationContext(), String.valueOf(NotificationBroadcastReceiver.holder) +" | "+ String.valueOf(cHolder),
+//                        Toast.LENGTH_LONG).show();
+
                 if(NotificationBroadcastReceiver.holder==0){
                     if(queueAlertHolder.equals(studNumHolder)){
-                        sendOnNotif("Queue Status", "You are currently 3 queues away from being served.");
+                        sendOnNotif("Queue Status", "You are currently 2 queues away from being served.");
                         cHolder=1;
                     }
                     else if(queueAlertHolder2.equals(studNumHolder)){
-                        sendOnNotif("Queue Status", "You are currently 2 queues away from being served.");
+                        sendOnNotif("Queue Status", "You are currently 1 queue away from being served.");
                         cHolder=2;
                     }
                     else if(queueAlertHolder3.equals(studNumHolder)){
-                        sendOnNotif("Queue Status", "You are currently 1 queue away from being served.");
+                        sendOnNotif("Queue Status", "Your queue ticket is now currently being served!");
                         cHolder=3;
                     }
                 }
@@ -125,6 +128,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             alertQueryFunc();
             alertQueryFunc2();
             alertQueryFunc3();
+
+            if(autoLogoutStopper==true){
+                autoLogoutIfUserHasNoQueueingNumber();
+            }
             mhandler.postDelayed(this, 1000);
         }
     };
@@ -132,6 +139,59 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     public void sendOnNotif(String title, String msg){
         NotificationCompat.Builder nb = mNotificationHelper.getChannerlNotification(title, msg);
         mNotificationHelper.getManeger().notify(1, nb.build());
+    }
+
+    private void autoLogoutIfUserHasNoQueueingNumber(){
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                Constants.URL_AUTOLOGOUT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            if (obj.getString("studentNumber").equals("null")) {
+                                stopper=false;
+                                autoLogoutStopper=false;
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        ("USER TRANSACTION DONE. LOGGING OUT."),
+                                        Toast.LENGTH_LONG
+                                ).show();
+                                userLogOut();
+                            } else {
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        obj.getString("message"),
+                                        Toast.LENGTH_LONG
+                                ).show();
+                                progressDialog.dismiss();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                ("No internet connection."),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("studentNumber", studNumHolder);
+                return params;
+            }
+        };
+        RequestHandler.getInstance(this).addToRequestQueue(stringRequest);
     }
 
     private void alertQueryFunc() {

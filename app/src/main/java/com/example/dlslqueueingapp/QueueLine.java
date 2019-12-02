@@ -58,7 +58,10 @@ public class QueueLine extends AppCompatActivity implements View.OnClickListener
         cashier1TxtVw4 = findViewById(R.id.cashier4CurrentQueueNumber);
 
         callFunc();
-
+        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
+        }
     }
 
     @Override
